@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ojaswi Advanced Diagnostics | Pilibhit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Razorpay Checkout -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- Firebase App & Firestore SDKs (Dual Database Support) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP CALL ANNOUNCEMENT BANNER (DEMO MATCH) -->
+<div class="top-call-banner">
+  <div>📞 To Book Your Test / Package Please Call @ <a href="tel:06396377441">06396377441</a> / <a href="tel:09321633897">09321633897</a></div>
+  <div class="open-badge">Open 24 Hours · NABL Accredited Care</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark">OA</div>
+      <div class="logo-text">
+        Ojaswi Advanced
+        <span>Diagnostics · Pilibhit</span>
+      </div>
+    </a>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="nav-menu">
+      <a href="#services" onclick="closeNav()">Packages & Tests</a>
+      <a href="#doctors" onclick="closeNav()">Doctors</a>
+      <a href="#reviews" onclick="closeNav()">Reviews</a>
+      <a href="#queue" onclick="closeNav()">Online Queue</a>
+      <a href="#contact" onclick="closeNav()">Contact</a>
+      <a href="javascript:void(0)" onclick="openUserStatusModal(); closeNav();" class="nav-track-link">🔍 Track Status</a>
+      <a href="javascript:void(0)" onclick="openAdminLogin(); closeNav();" class="nav-admin-link">🔐 Admin</a>
+      <a href="javascript:void(0)" class="nav-book" onclick="openModal(); closeNav();">Book Slot</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-pattern"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag"><div class="hero-tag-dot"></div> Pilibhit ka #1 Diagnostic Center</div>
+      <h1>Advanced<em>Diagnostics</em>You Can Trust</h1>
+      <p class="hero-desc">72 Ashok Colony, Near Gokhle Hospital, Pilibhit — 5D Ultrasound, CT Scan, Digital X-Ray, Pathology aur Comprehensive Health Packages. Zero wait time aur same-day accurate reports.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openModal()">📅 Online Slot Book Karo</button>
+        <a href="tel:06396377441" class="btn-outline">📞 Call Karo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Saal ka Anubhav</div></div>
+        <div class="stat"><div class="stat-num">50k+</div><div class="stat-label">Patients Trust</div></div>
+        <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Google Rating</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-title">⚡ Quick Book — Zero Waiting Time</div>
+        <div class="dept-list">
+          <div class="dept-item" onclick="openModal('Healthkind Total Plus (87 Tests)', 2249)">
+            <div class="dept-emoji">🩺</div>
+            <div class="dept-info"><div class="dept-info-name">Healthkind Total Plus (87 Tests)</div><div class="dept-info-price">₹2,249 <span style="text-decoration:line-through;color:#aaa;">₹8,626</span> (74% Off)</div></div>
+            <div class="dept-arrow">→</div>
+          </div>
+          <div class="dept-item" onclick="openModal('5D Ultrasound', 900)">
+            <div class="dept-emoji">🫀</div>
+            <div class="dept-info"><div class="dept-info-name">5D Ultrasound</div><div class="dept-info-price">Starting ₹900</div></div>
+            <div class="dept-arrow">→</div>
+          </div>
+          <div class="dept-item" onclick="openModal('CT Scan', 2500)">
+            <div class="dept-emoji">🧠</div>
+            <div class="dept-info"><div class="dept-info-name">CT Scan (64-Slice)</div><div class="dept-info-price">Starting ₹2,500</div></div>
+            <div class="dept-arrow">→</div>
+          </div>
+          <div class="dept-item" onclick="openModal('Digital X-Ray', 400)">
+            <div class="dept-emoji">🦴</div>
+            <div class="dept-info"><div class="dept-info-name">Digital X-Ray</div><div class="dept-info-price">Starting ₹400</div></div>
+            <div class="dept-arrow">→</div>
+          </div>
+        </div>
+        <div class="hero-contact">
+          <div class="hero-contact-icon">📞</div>
+          <div>
+            <div class="hero-contact-text">Helpdesk 24 Hours Open</div>
+            <div class="hero-contact-num">06396377441</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">5D Ultrasound</span><span class="strip-dot">◆</span>
+    <span class="strip-item">64-Slice CT Scan</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Digital X-Ray</span><span class="strip-dot">◆</span>
+    <span class="strip-item">1.5T MRI</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Healthkind Total Packages</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Pathology Lab</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Online Queue System</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Same Day Reports</span><span class="strip-dot">◆</span>
+    <span class="strip-item">5D Ultrasound</span><span class="strip-dot">◆</span>
+    <span class="strip-item">64-Slice CT Scan</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Digital X-Ray</span><span class="strip-dot">◆</span>
+    <span class="strip-item">1.5T MRI</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Healthkind Total Packages</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Pathology Lab</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Online Queue System</span><span class="strip-dot">◆</span>
+    <span class="strip-item">Same Day Reports</span><span class="strip-dot">◆</span>
+  </div>
+</div>
+
+<!-- SERVICES & PACKAGES (DEMO DESIGN WITH REAL IMAGES) -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-tag">Our Test Packages & Services</div>
+    <h2 class="section-title">Comprehensive <em>Health Packages</em> & Imaging</h2>
+    <p class="section-sub">Latest 2026 diagnostic technology, maximum discount offers aur certified lab reports</p>
+  </div>
+
+  <div class="services-grid">
+    <!-- Package 1: Healthkind Total Plus -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="healthkind_total.jpg" alt="Healthkind Total Plus Indian Family Checkup" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">Most Popular</div>
+        <div class="pkg-discount-ribbon">74% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">87 Parameters Included</div>
+        <div class="pkg-name">HEALTHKIND TOTAL PLUS</div>
+        <p class="pkg-desc">Complete blood count, liver function, kidney profile, lipid cholesterol, thyroid profile, urine routine & blood sugar.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 2,249</div>
+          <div class="pkg-old-price">₹ 8,626</div>
+          <div class="pkg-save-tag">Save ₹6,377</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('HEALTHKIND TOTAL PLUS', 87, 'CBC (18 tests), Liver Function Test (11 tests), Kidney Function Test (8 tests), Lipid Profile (9 tests), Thyroid T3/T4/TSH (3 tests), Blood Sugar Fasting, HbA1c, Urine Routine (20 tests), Vitamin D & B12.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('Healthkind Total Plus', 2249)">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package 2: Healthkind Total -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="pathology_lab.jpg" alt="Healthkind Total Pathology Lab" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">Best Value</div>
+        <div class="pkg-discount-ribbon">74% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">85 Parameters Included</div>
+        <div class="pkg-name">HEALTHKIND TOTAL</div>
+        <p class="pkg-desc">Preventive whole body routine testing. Essential organ monitoring with quick online report access within 6 hours.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 1,949</div>
+          <div class="pkg-old-price">₹ 7,365</div>
+          <div class="pkg-save-tag">Save ₹5,416</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('HEALTHKIND TOTAL', 85, 'CBC (18 parameters), LFT, KFT, Lipid Profile, Uric Acid, ESR, Urine Routine Exam, Blood Glucose.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('Healthkind Total', 1949)">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package 3: Healthkind Advance -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="healthkind_advance.jpg" alt="Healthkind Advance" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">Comprehensive</div>
+        <div class="pkg-discount-ribbon">58% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">97 Parameters Included</div>
+        <div class="pkg-name">HEALTHKIND ADVANCE</div>
+        <p class="pkg-desc">Advanced cardiac markers, comprehensive vitamins (D3 + B12), hormone screening, and full metabolic panels.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 4,999</div>
+          <div class="pkg-old-price">₹ 11,918</div>
+          <div class="pkg-save-tag">Save ₹6,919</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('HEALTHKIND ADVANCE', 97, 'Complete 85 parameters plus Vitamin D3, Vitamin B12, hs-CRP, Cardiac Risk Markers, Electrolytes, Iron Profile, Thyroid Total.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('Healthkind Advance', 4999)">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 4: 5D Ultrasound -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="ultrasound_5d.jpg" alt="5D Ultrasound Sonography" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">5D HD Live</div>
+        <div class="pkg-discount-ribbon">50% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">Obstetric & General</div>
+        <div class="pkg-name">5D ULTRASOUND SCAN</div>
+        <p class="pkg-desc">High Definition real-time fetal imaging with Color Doppler. Anomaly scan, abdominal & pelvic ultrasound by senior radiologists.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 900</div>
+          <div class="pkg-old-price">₹ 1,800</div>
+          <div class="pkg-save-tag">Starting ₹900</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('5D Ultrasound', 'HD Live Scan', '5D Real-time fetus visualization, Color Doppler Blood Flow, Growth Scan, Level II Anomaly Scan, Pelvic & Abdominal Sonography.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('5D Ultrasound', 900)">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 5: 64-Slice CT Scan -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="ct_scan_64.jpg" alt="CT Scan" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">Ultra-Fast 64-Slice</div>
+        <div class="pkg-discount-ribbon">50% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">Brain, Chest & Body</div>
+        <div class="pkg-name">64-SLICE CT SCAN</div>
+        <p class="pkg-desc">Sub-millimeter precision scanning with low radiation dose. HRCT Chest, CT Brain, CT Angiography with fast 4-hour reports.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 2,500</div>
+          <div class="pkg-old-price">₹ 5,000</div>
+          <div class="pkg-save-tag">Starting ₹2500</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('64-Slice CT Scan', 'Sub-mm Imaging', 'NCCT / CECT Brain, HRCT Chest, Whole Abdomen CT, Spine & Extremities with 3D reconstructed views.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('CT Scan', 2500)">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 6: Digital HD X-Ray -->
+    <div class="pkg-card">
+      <div class="pkg-img-wrap">
+        <img src="digital_xray.jpg" alt="Digital X-Ray" class="pkg-img" loading="lazy">
+        <div class="pkg-tag-badge">Instant Radiography</div>
+        <div class="pkg-discount-ribbon">50% Discount</div>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-param-badge">High Resolution Digital</div>
+        <div class="pkg-name">DIGITAL HD X-RAY</div>
+        <p class="pkg-desc">Crystal clear digital detector radiography. Chest PA, spine, bones, fractures diagnosis with instant film and digital copy.</p>
+        <div class="pkg-price-row">
+          <div class="pkg-new-price">₹ 400</div>
+          <div class="pkg-old-price">₹ 800</div>
+          <div class="pkg-save-tag">Starting ₹400</div>
+        </div>
+        <div class="pkg-actions">
+          <button class="btn-know-more" onclick="showPackageDetails('Digital HD X-Ray', 'Instant Processing', 'Chest X-Ray, Spine (Cervical/Lumbar), Joint Views, Abdomen KUB, Orthopedic injury assessment.')">Know More</button>
+          <button class="btn-book-pkg" onclick="openModal('Digital X-Ray', 400)">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="doctors" id="doctors">
+  <div class="section-header">
+    <div class="section-tag">Hamare Doctors</div>
+    <h2 class="section-title">Expert <em>Medical</em> Team</h2>
+    <p class="section-sub">Experienced radiologists aur pathologists ki team aapki seva mein</p>
+  </div>
+  <div class="doctors-grid">
+    <div class="doc-card">
+      <div class="doc-top">
+        <div class="doc-avatar">AP</div>
+        <div class="doc-name">Dr. Anurag Prakash</div>
+        <div class="doc-qual">MD Radiodiagnosis</div>
+      </div>
+      <div class="doc-bottom">
+        <p class="doc-spec">Senior Radiologist with expertise in CT, MRI, and advanced ultrasound imaging. 12+ saal ka clinical experience diagnostic imaging mein.</p>
+        <div class="doc-badge">✅ Available Mon–Sat</div>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-top">
+        <div class="doc-avatar">OP</div>
+        <div class="doc-name">Dr. Ojasawi Pathak</div>
+        <div class="doc-qual">MD Radiodiagnosis</div>
+      </div>
+      <div class="doc-bottom">
+        <p class="doc-spec">Expert in 5D ultrasound and obstetric imaging. Specializes in high-risk pregnancy monitoring, anomaly detection and fetal Doppler studies.</p>
+        <div class="doc-badge">✅ Available Mon–Sat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATIENT REVIEWS (REQUESTED FEATURE) -->
+<section class="reviews-sec" id="reviews">
+  <div class="section-header">
+    <div class="section-tag">Patient Feedback</div>
+    <h2 class="section-title">Google Rating <em>4.9★</em> Reviews</h2>
+    <p class="section-sub">Pilibhit aur aas-paas ke 50,000+ satisfied families ka vishwas</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="rev-top">
+        <div class="rev-avatar">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Rajesh Agrawal" loading="lazy">
+        </div>
+        <div class="rev-info">
+          <h4>Rajesh Agrawal</h4>
+          <span>✓ Verified Patient</span>
+        </div>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Pilibhit ka best diagnostic center hai. 5D ultrasound itna clear tha aur Dr. Anurag ne ek ek cheez detail me explain ki. Online queue feature se wait bilkul nahi karna pada!"</p>
+    </div>
+    <div class="review-card">
+      <div class="rev-top">
+        <div class="rev-avatar">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Meenakshi Sharma" loading="lazy">
+        </div>
+        <div class="rev-info">
+          <h4>Meenakshi Sharma</h4>
+          <span>✓ Verified Patient</span>
+        </div>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Healthkind Total Plus package liya tha pure parivar ke liye. 87 tests sirf ₹2249 mein ho gaye. Phlebotomist time par ghar aaya aur report sham tak WhatsApp pe mil gayi."</p>
+    </div>
+    <div class="review-card">
+      <div class="rev-top">
+        <div class="rev-avatar">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Sunil Verma" loading="lazy">
+        </div>
+        <div class="rev-info">
+          <h4>Sunil Verma</h4>
+          <span>✓ Verified Patient</span>
+        </div>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Emergency me CT Scan karwaya tha. 64-slice machine bahut advance hai aur reports 3 ghante me mil gayi. Staff bahut cooperative aur caring hai."</p>
+    </div>
+    <div class="review-card">
+      <div class="rev-top">
+        <div class="rev-avatar">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80" alt="Dr. K. K. Gupta" loading="lazy">
+        </div>
+        <div class="rev-info">
+          <h4>Dr. K. K. Gupta</h4>
+          <span>✓ Referring Physician</span>
+        </div>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"Main apne sabhi clinical patients ko Ojaswi refer karta hoon. Reports ki accuracy aur machine calibration standard level ki hai. Excellent service in Pilibhit."</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-grid">
+    <div class="why-left">
+      <div class="section-tag">Kyun Chunein Hume</div>
+      <h2 class="section-title">Pilibhit ka <em>Most Trusted</em> Diagnostic</h2>
+      <p class="section-sub">2013 se lakho patients ka bharosa. Advanced technology, expert doctors, aur affordable packages.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon">⚡</div>
+          <div class="why-text"><h4>Same Day Reports</h4><p>Blood test, X-Ray — results usi din. CT & MRI fast turnaround time mein.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🔬</div>
+          <div class="why-text"><h4>Latest Technology</h4><p>5D Ultrasound, 64-slice CT, Digital Radiography — Pilibhit ki sabse modern machines.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">💰</div>
+          <div class="why-text"><h4>Affordable Health Packages</h4><p>Preventive checkups par 70%+ discount taaki har koi regular checkup kara sake.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">📱</div>
+          <div class="why-text"><h4>Live Database & Online Queue</h4><p>Online book karo, live status check karo — center pe zero waiting time.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-right">
+      <div class="metric-card"><div class="metric-num">12+</div><div class="metric-label">Saal ka anubhav healthcare mein</div></div>
+      <div class="metric-card"><div class="metric-num">50k+</div><div class="metric-label">Successful tests har saal</div></div>
+      <div class="metric-card"><div class="metric-num">4.9★</div><div class="metric-label">Google rating 150+ reviews</div></div>
+      <div class="metric-card"><div class="metric-num">87+</div><div class="metric-label">Comprehensive Health Parameters</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEUE SECTION (LIVE DATABASE SYNCED) -->
+<section class="queue-sec" id="queue">
+  <div class="queue-inner">
+    <div>
+      <div class="section-tag">Live Queue Tracker</div>
+      <h2 class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--navy);">Live Queue — <em style="color:var(--gold);font-style:normal;">Ghar Pe Baitho</em></h2>
+      <p style="font-size:14px;color:var(--muted);margin-top:10px;font-weight:300;line-height:1.7;">Line mein khade rehne ki zarurat nahi. Online book karein, instant token lein aur live tracker par apni baari dekhein.</p>
+      <div class="queue-steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Online Book Karo</h4><p>Package ya test select karein aur slot book karein.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Instant Token Milo</h4><p>Payment hote hi screen par verified token number milta hai.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Live Status Track Karo</h4><p>Yahan live dekhein kaunsa number chal raha hai aur kab aana hai.</p></div></div>
+      </div>
+      <button class="btn-primary" onclick="openModal()" style="margin-top:24px;">📅 Abhi Slot Book Karo</button>
+    </div>
+    <div class="queue-demo">
+      <div class="qd-header">
+        <div class="qd-title">Live Diagnostics Queue</div>
+        <div class="qd-live"><div class="qd-live-dot"></div>Database Synced</div>
+      </div>
+      <div class="qd-current">
+        <div class="qd-cur-label">Now Serving Token</div>
+        <div class="qd-cur-tok" id="cur-tok-disp">OA-102</div>
+      </div>
+      <div class="qd-items" id="live-queue-list">
+        <!-- Dynamically injected from Database -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="section-header">
+      <div class="section-tag">Hamare Baare Mein</div>
+      <h2 class="section-title">Hamse <em>Milein</em></h2>
+      <p class="section-sub">72 Ashok Colony, Near Gokhle Hospital, Pilibhit — Uttar Pradesh 262001</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Contact Information</h3>
+        <div class="contact-item"><div class="c-icon">📍</div><div class="c-text"><strong>Address</strong>72, Near Gokhle Hospital, Ashok Colony, Ballabh Nagar Colony, Pilibhit, Uttar Pradesh 262001</div></div>
+        <div class="contact-item"><div class="c-icon">📞</div><div class="c-text"><strong>Phone / WhatsApp</strong>06396377441<br>09321633897</div></div>
+        <div class="contact-item"><div class="c-icon">🕐</div><div class="c-text"><strong>Timing</strong>Open 24 Hours (All 7 Days)</div></div>
+        <div class="contact-item"><div class="c-icon">⭐</div><div class="c-text"><strong>Google Rating</strong>4.9 ★ (Certified Diagnostics Center)</div></div>
+      </div>
+      <div class="contact-card">
+        <h3>Location Map</h3>
+        <div class="map-container">
+          <iframe 
+            src="https://maps.google.com/maps?q=Ojaswi+Diagnostics+Centre+72+Ashok+Colony+Pilibhit+Uttar+Pradesh+262001&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ojaswi Diagnostics Pilibhit Location">
+          </iframe>
+        </div>
+        <div style="margin-top:12px;text-align:right;">
+          <a href="https://www.google.com/maps/search/?api=1&query=Ojaswi+Diagnostics+Centre+72+Ashok+Colony+Pilibhit+Uttar+Pradesh+262001" class="map-link" target="_blank">📍 Open in Google Maps →</a>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;">
+          <a href="tel:06396377441" class="btn-primary" style="flex:1;justify-content:center;font-size:13px;">📞 Call Now</a>
+          <button onclick="openModal()" class="btn-outline" style="flex:1;justify-content:center;font-size:13px;border-radius:8px;cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif;font-weight:500;">📅 Book Slot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Ojaswi <span>Advanced</span> Diagnostics</div>
+    <div class="footer-copy">© 2026 Ojaswi Advanced Diagnostics, Pilibhit. All rights reserved. Vercel & Cloud Ready.</div>
+    <div class="footer-links">
+      <a href="#services">Packages</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#queue">Live Queue</a>
+      <a href="javascript:void(0)" onclick="openAdminLogin()">🔐 Admin</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/916396377441?text=Namaste%20Ojaswi%20Diagnostics%2C%20mujhe%20appointment%20book%20karna%20hai" class="whatsapp-float" target="_blank" aria-label="WhatsApp Us">
+  <svg viewBox="0 0 32 32">
+    <path d="M16 2a13 13 0 0 0-11.3 19.4L3 29l7.8-2A13 13 0 1 0 16 2zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-4 1 1-3.9-.3-.4a10.6 10.6 0 1 1 9.1 5zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 8.9 8.9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.4-.5a1.8 1.8 0 0 0 .3-.5.6.6 0 0 0 0-.5c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.5 6.5 0 0 0 1.4 3.4 14.8 14.8 0 0 0 5.7 5c.8.4 1.4.6 1.9.8a4.5 4.5 0 0 0 2.1.1 3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.5c-.1-.1-.4-.2-.7-.4z"/>
+  </svg>
+</a>
+
+<!-- USER / PATIENT STATUS & REPORT TRACKING MODAL -->
+<div class="modal-overlay" id="user-status-modal" onclick="closeUserStatusModalOverlay(event)">
+  <div class="modal" style="max-width:500px;">
+    <div class="modal-header">
+      <h3>🔍 Patient Portal — Track Status & Reports</h3>
+      <button class="modal-close" onclick="closeUserStatusModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6;">Apna <strong>Mobile Number</strong> (10 digit) ya <strong>Token Number</strong> (jaise OA-101, OA-102) enter karein aur live appointment/report status dekhein.</p>
+      <form onsubmit="trackPatientStatus(event)">
+        <div class="mfield">
+          <label>Token No ya Mobile Number *</label>
+          <input type="text" id="track-input" placeholder="e.g. OA-102 ya 9876543210" required>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0 14px;font-size:11px;">
+          <span style="color:#64748b;font-weight:600;">Quick Demo Tokens:</span>
+          <button type="button" onclick="quickTrackToken('OA-101')" style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:3px 8px;border-radius:12px;cursor:pointer;font-weight:600;">OA-101 (Ready)</button>
+          <button type="button" onclick="quickTrackToken('OA-102')" style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;padding:3px 8px;border-radius:12px;cursor:pointer;font-weight:600;">OA-102 (In-Lab)</button>
+          <button type="button" onclick="quickTrackToken('OA-103')" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:3px 8px;border-radius:12px;cursor:pointer;font-weight:600;">OA-103 (Waiting)</button>
+        </div>
+        <button type="submit" class="mpay-btn" style="background:var(--navy);">🔎 Check Live Status & Report</button>
+      </form>
+      <div id="track-result-area" style="margin-top:16px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PATIENT BOOKING MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title-text">Online Slot & Test Booking</h3>
+      <button class="modal-close" onclick="closeModalDirect()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body-content">
+      <!-- TOP CLINICAL BANNER -->
+      <div class="modal-banner-wrap">
+        <img id="booking-modal-banner-img" src="healthkind_total.jpg" alt="Diagnostic Booking" class="modal-banner-img">
+        <div class="modal-banner-overlay">
+          <span class="m-ban-tag">🏥 Ojaswi Advanced Diagnostics</span>
+          <h4>Online Priority Slot Booking</h4>
+        </div>
+      </div>
+
+      <p style="font-size:11px;color:#6b7280;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:10px;">Select Department / Test Package *</p>
+      <div class="modal-dept-sel">
+        <div class="mdept sel" onclick="mSelDept(this,'Healthkind Total Plus',2249)"><div class="mdept-icon">🩺</div><div class="mdept-name">Healthkind Total+</div><div class="mdept-price">₹2,249</div></div>
+        <div class="mdept" onclick="mSelDept(this,'Healthkind Advance',4999)"><div class="mdept-icon">🧬</div><div class="mdept-name">Healthkind Adv.</div><div class="mdept-price">₹4,999</div></div>
+        <div class="mdept" onclick="mSelDept(this,'5D Ultrasound',900)"><div class="mdept-icon">🫀</div><div class="mdept-name">5D Ultrasound</div><div class="mdept-price">₹900</div></div>
+        <div class="mdept" onclick="mSelDept(this,'CT Scan',2500)"><div class="mdept-icon">🧠</div><div class="mdept-name">CT Scan</div><div class="mdept-price">₹2,500</div></div>
+        <div class="mdept" onclick="mSelDept(this,'Digital X-Ray',400)"><div class="mdept-icon">🦴</div><div class="mdept-name">Digital X-Ray</div><div class="mdept-price">₹400</div></div>
+        <div class="mdept" onclick="mSelDept(this,'1.5T MRI Scan',3500)"><div class="mdept-icon">🧲</div><div class="mdept-name">1.5T MRI</div><div class="mdept-price">₹3,500</div></div>
+      </div>
+      
+      <div class="mfield">
+        <label for="m-name">Patient Full Name *</label>
+        <input id="m-name" type="text" placeholder="e.g. Priya Sharma / Rajesh Verma"/>
+        <div class="mfield-error" id="err-name">Kripya apna full name likhein</div>
+      </div>
+
+      <div class="mfield-row">
+        <div class="mfield">
+          <label for="m-age">Age (Years) *</label>
+          <input id="m-age" type="number" placeholder="e.g. 28" min="1" max="110"/>
+        </div>
+        <div class="mfield">
+          <label for="m-gender">Gender *</label>
+          <select id="m-gender">
+            <option value="Female">Female (महिला)</option>
+            <option value="Male">Male (पुरुष)</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mfield-row">
+        <div class="mfield">
+          <label for="m-phone">Mobile Number *</label>
+          <input id="m-phone" type="tel" placeholder="10 digit number" maxlength="10"/>
+          <div class="mfield-error" id="err-phone">Sahi 10 digit number enter karein</div>
+        </div>
+        <div class="mfield">
+          <label for="m-aadhaar">Aadhaar Number (Optional)</label>
+          <input id="m-aadhaar" type="text" placeholder="XXXX XXXX XXXX" maxlength="14"/>
+          <div class="mfield-error" id="err-aadhaar">Sahi 12 digit Aadhaar number enter karein</div>
+        </div>
+      </div>
+
+      <div class="mfield-row">
+        <div class="mfield">
+          <label for="m-date">Date Chunein *</label>
+          <input id="m-date" type="date"/>
+          <div class="mfield-error" id="err-date">Date select karein</div>
+        </div>
+        <div class="mfield">
+          <label for="m-time">Time Slot *</label>
+          <select id="m-time">
+            <option value="">Time Slot...</option>
+            <option value="08:00 AM - 10:00 AM">08:00 AM - 10:00 AM</option>
+            <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
+            <option value="12:00 PM - 02:00 PM">12:00 PM - 02:00 PM</option>
+            <option value="02:00 PM - 04:00 PM">02:00 PM - 04:00 PM</option>
+            <option value="04:00 PM - 06:00 PM">04:00 PM - 06:00 PM</option>
+          </select>
+          <div class="mfield-error" id="err-time">Slot select karein</div>
+        </div>
+      </div>
+
+      <button class="mpay-btn" onclick="doRazorpay()">💳 Pay Online via Razorpay / UPI — ₹<span id="m-price">2249</span></button>
+      <button class="btn-print" style="margin-top:8px;background:#f8fafc;color:var(--navy);border:1.5px solid #cbd5e1;" onclick="bookDirectPayAtCounter()">🏥 Pay at Center Counter (Cash / UPI)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="admin-login-modal">
+  <div class="modal" style="max-width:400px;">
+    <div class="modal-header">
+      <h3>🔐 Admin / Staff Login</h3>
+      <button class="modal-close" onclick="closeAdminLogin()">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:18px;">
+        <div style="font-size:36px;margin-bottom:6px;">👨‍⚕️</div>
+        <p style="font-size:13px;color:var(--muted);">Ojaswi Diagnostic Management Console</p>
+      </div>
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="mfield">
+          <label>Username</label>
+          <input type="text" id="adm-user" placeholder="admin" required autocomplete="username">
+        </div>
+        <div class="mfield">
+          <label>Password</label>
+          <input type="password" id="adm-pass" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div id="adm-login-err" style="color:var(--red);font-size:12px;margin-bottom:10px;display:none;">Galat Username ya Password!</div>
+        <button type="submit" class="mpay-btn" style="background:var(--navy);">🚀 Login To Dashboard</button>
+      </form>
+      <div style="margin-top:14px;padding:10px;background:#f8fafc;border-radius:8px;font-size:11px;color:#64748b;text-align:center;">
+        Default Credentials: <strong>admin</strong> / <strong>admin123</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD FULL MODAL -->
+<div class="modal-overlay" id="admin-dash-modal">
+  <div class="modal modal-admin">
+    <div class="modal-header">
+      <div>
+        <h3 style="font-size:20px;">📊 Admin Control Center — Ojaswi Diagnostics</h3>
+        <p style="font-size:11px;color:rgba(255,255,255,0.7);margin-top:2px;">Live Bookings, Patient Queue & Revenue Manager</p>
+      </div>
+      <button class="modal-close" onclick="closeAdminDashboard()">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- KPI METRICS -->
+      <div class="admin-metrics">
+        <div class="adm-m-card">
+          <span class="adm-m-label">Total Appointments</span>
+          <span class="adm-m-val" id="adm-kpi-total">0</span>
+          <span class="adm-m-sub">All-time bookings</span>
+        </div>
+        <div class="adm-m-card">
+          <span class="adm-m-label">Queue Waiting</span>
+          <span class="adm-m-val" id="adm-kpi-waiting" style="color:#d97706;">0</span>
+          <span class="adm-m-sub">Current active queue</span>
+        </div>
+        <div class="adm-m-card">
+          <span class="adm-m-label">Completed Today</span>
+          <span class="adm-m-val" id="adm-kpi-done" style="color:#16a34a;">0</span>
+          <span class="adm-m-sub">Reports dispatched</span>
+        </div>
+        <div class="adm-m-card">
+          <span class="adm-m-label">Total Collection</span>
+          <span class="adm-m-val" id="adm-kpi-rev" style="color:var(--navy);">₹0</span>
+          <span class="adm-m-sub">Revenue booked</span>
+        </div>
+      </div>
+
+      <!-- LIVE ANNOUNCEMENT BANNER -->
+      <div class="admin-call-banner" id="adm-now-calling-bar">
+        <div>📢 <strong>Live Consultation Room:</strong> <span id="adm-call-banner-text">Waiting to call next patient...</span></div>
+        <div class="adm-voice-badge">🔊 Voice Call Active</div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="admin-toolbar">
+        <input type="text" class="adm-search-input" id="adm-search" placeholder="🔍 Search patient, phone, token..." oninput="renderAdminBookings()">
+        <select class="adm-filter-sel" id="adm-filter-dept" onchange="renderAdminBookings()">
+          <option value="ALL">All Departments</option>
+          <option value="Healthkind Total Plus">Healthkind Total Plus</option>
+          <option value="5D Ultrasound">5D Ultrasound</option>
+          <option value="CT Scan">CT Scan</option>
+          <option value="Digital X-Ray">Digital X-Ray</option>
+        </select>
+        <div style="display:flex;gap:8px;">
+          <button class="adm-btn-export" onclick="exportBookingsToCSV()">📥 Export to Excel / CSV</button>
+          <button class="adm-btn-export" style="background:var(--navy);" onclick="openModal(); closeAdminDashboard();">+ New Patient</button>
+        </div>
+      </div>
+
+      <!-- APPOINTMENTS TABLE -->
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Patient</th>
+              <th>Phone</th>
+              <th>Department</th>
+              <th>Date & Slot</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DB STATUS BAR -->
+      <div class="db-status-bar">
+        <div class="db-indicator">
+          <span class="db-dot"></span>
+          <span>Database: <strong id="db-conn-text">Firebase Cloud Firestore (nielit-project-bca35) Connected & Live</strong></span>
+        </div>
+        <div>
+          <button onclick="logoutAdmin()" style="background:none;border:none;color:#dc2626;cursor:pointer;font-weight:600;font-size:12px;">🚪 Logout Admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGE DETAILS "KNOW MORE" MODAL -->
+<div class="modal-overlay" id="package-info-modal">
+  <div class="modal" style="max-width:540px;">
+    <div class="modal-header">
+      <h3 id="pkg-modal-title">Package Details</h3>
+      <button class="modal-close" onclick="closePackageDetails()">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- DYNAMIC CLINICAL BANNER IMAGE -->
+      <div class="modal-banner-wrap" style="position:relative;border-radius:12px;overflow:hidden;margin-bottom:16px;">
+        <img id="pkg-modal-img" src="healthkind_total.jpg" alt="Package Visual" class="modal-banner-img" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <div class="modal-banner-overlay" style="position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top, rgba(11,37,69,0.95) 0%, rgba(11,37,69,0.4) 70%, transparent 100%);color:#fff;">
+          <span class="m-ban-tag" style="display:inline-block;background:rgba(234,179,8,0.25);color:#fef08a;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:0.8px;margin-bottom:4px;">🔬 OJASWI DIAGNOSTIC PROTOCOL</span>
+          <h4 id="pkg-modal-heading" style="margin:0;font-size:17px;font-weight:700;color:#fff;">Healthkind Total Plus</h4>
+        </div>
+      </div>
+
+      <div style="background:#eef2ff;border-radius:10px;padding:12px 14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:13px;font-weight:700;color:#3730a3;" id="pkg-modal-badge">87 Parameters Included</div>
+        <span style="font-size:11px;background:#c7d2fe;color:#312e81;padding:3px 10px;border-radius:12px;font-weight:600;">Same Day Report</span>
+      </div>
+      <h4 style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:8px;">Included Diagnostic Tests & Profiling:</h4>
+      <div id="pkg-modal-tests" style="font-size:13px;color:#475569;line-height:1.7;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:18px;">
+      </div>
+      <button class="mpay-btn" id="pkg-modal-book-btn">📅 Book This Package Now</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
