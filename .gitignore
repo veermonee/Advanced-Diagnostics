@@ -1,6 +1,8 @@
 # Personal and Temporary documents
 *.pdf
 *.docx
+*.tmp
+~$*
 demo.jpeg
 ct-scan.avif
 hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.html

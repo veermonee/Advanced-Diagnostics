@@ -568,44 +568,6 @@ function resetModalView() {
   }
 }
 
-// Quick Sample Collection Form Handler
-function handleQuickInquiry(e) {
-  e.preventDefault();
-  var name = document.getElementById('sf-name').value.trim();
-  var phone = document.getElementById('sf-phone').value.trim();
-  var city = document.getElementById('sf-city').value;
-  var pkg = document.getElementById('sf-package').value;
-
-  if (!name || phone.length !== 10 || !city) {
-    alert("Kripya sahi naam, 10 digit number aur city chunein!");
-    return;
-  }
-
-  var tokenNum = Math.floor(105 + Math.random() * 890);
-  var tokenNo = 'OA-' + tokenNum;
-
-  var newBooking = {
-    id: 'b-' + Date.now(),
-    token: tokenNo,
-    name: name + ' (' + city + ')',
-    phone: phone,
-    aadhaar: 'Sample Collection Request',
-    dept: pkg,
-    price: pkg.indexOf('2249') !== -1 ? 2249 : (pkg.indexOf('1949') !== -1 ? 1949 : (pkg.indexOf('2500') !== -1 ? 2500 : 900)),
-    date: new Date().toISOString().split('T')[0],
-    time: 'Home Collection',
-    payId: 'INQUIRY-COLLECTION',
-    payMode: 'Cash on Collection',
-    status: 'Waiting',
-    createdAt: new Date().toISOString()
-  };
-
-  addBookingToDatabase(newBooking);
-
-  alert(`Dhanyawad ${name} Ji!\nAapka request Token #${tokenNo} register ho gaya hai. Humari medical team 10 minute me aapse call karegi.`);
-  document.getElementById('quick-inquiry-form').reset();
-}
-
 // Live Queue Renderer
 function renderLiveQueue() {
   var list = getBookings();

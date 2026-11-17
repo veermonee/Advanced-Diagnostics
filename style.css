@@ -300,64 +300,6 @@ nav{position:sticky;top:0;left:0;right:0;z-index:100;padding:0 5%;background:rgb
   color:var(--navy);
 }
 
-/* SAMPLE COLLECTION QUICK FORM (DEMO MATCH) */
-.sample-form-sec{
-  margin-top:50px;
-  background:linear-gradient(135deg, #0b2545, #163872);
-  border-radius:24px;
-  padding:40px;
-  color:white;
-  box-shadow:0 12px 40px rgba(11,37,69,0.15);
-  max-width:1100px;
-  margin-left:auto;
-  margin-right:auto;
-}
-.sample-form-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  font-weight:700;
-  color:white;
-  margin-bottom:6px;
-}
-.sample-form-sub{
-  font-size:14px;
-  color:rgba(255,255,255,0.7);
-  margin-bottom:24px;
-}
-.sample-form-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-  gap:16px;
-  align-items:flex-end;
-}
-.sf-group{display:flex;flex-direction:column;gap:6px;}
-.sf-group label{font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;}
-.sf-group input, .sf-group select{
-  padding:12px 14px;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.08);
-  color:white;
-  font-size:14px;
-  font-family:'DM Sans',sans-serif;
-  outline:none;
-}
-.sf-group input::placeholder{color:rgba(255,255,255,0.5);}
-.sf-group select option{background:var(--navy);color:white;}
-.sf-submit-btn{
-  background:var(--gold);
-  color:var(--navy);
-  border:none;
-  padding:13px 24px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-  transition:all 0.2s;
-  height:46px;
-}
-.sf-submit-btn:hover{background:#e0aa42;}
-
 /* DOCTORS */
 .doctors{padding:80px 5%;background:var(--white);}
 .doctors-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:900px;margin:0 auto;}
